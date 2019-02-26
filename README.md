@@ -1,6 +1,6 @@
 # Image downloader project
 
-Application should download a picture specified by user using URL path. User should be able to specify one postprocessing done on the downloaded picture. User should be presented with the original picture and postprocessed one, and be able to save one or both of those pictures.
+Application should download a picture specified by user, using URL path. User should be able to specify one postprocessing executed on the downloaded picture. User should be presented with the original and postprocessed pictures, and be able to save one or both of those pictures.
 
 ## Requirements
 User should create virtual environment using `venv` and requirements from `requirements.txt`
@@ -31,7 +31,7 @@ python 'http://<path_to_pic>.png' -rc
 ```
 python 'http://<path_to_pic>.png' -r 180
 ```
-* `-c PIXELS` cut image specifying `PIXELS` as 4 coordinates: x_start y_start x_end y_end **no comma**
+* `-c PIXELS` cut image specifyed by `PIXELS` as 4 coordinates: x_start y_start x_end y_end **with no comma** (coordinates x_start: 0 and y_start: 0 being top left of the picture)
 ```
 python 'http://<path_to_pic>.png' -c 10 20 250 400
 ```
