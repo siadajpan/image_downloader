@@ -3,7 +3,7 @@
 Application should download a picture specified by user, using URL path. User should be able to specify one postprocessing executed on the downloaded picture. User should be presented with the original and postprocessed pictures, and be able to save one or both of those pictures.
 
 ## Requirements
-User should create virtual environment using `venv` and requirements from `requirements.txt`
+User should create virtual environment using `venv`, python 3 (created on python=3.6.5) and requirements from `requirements.txt`
 
 ## Execution
  Program should be executed on console as described below:
