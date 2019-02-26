@@ -61,5 +61,5 @@ for argument in vars(args):
         elif argument == 'cut':
             image_processor.cut(value)
 
-# wait for user input inside this method
+# show images and wait for user input inside this method
 image_processor.show_images()

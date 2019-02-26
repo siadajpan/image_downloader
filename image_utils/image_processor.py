@@ -12,14 +12,17 @@ class Image_Processor:
         
     # download image from url and save it to self.original_image
     def download_image(self, image_url):
+        # convert content of request to byte stream
         img_stream = BytesIO(requests.get(image_url).content)
+        # convert byte stream to string, and decode it as color (flag 1) image
         self.original_image = cv2.imdecode(np.fromstring(img_stream.read(), 
                                                          np.uint8), 1)
     # change color to gray scale
     def to_gray(self):
         self.processed_image = cv2.cvtColor(self.original_image, 
                                             cv2.COLOR_BGR2GRAY)
-        # merge into 3 channels picture, so it can be displayed with color one
+        # merge into 3 channels picture, gray-scale picture
+        # so it can be displayed with color one
         self.processed_image = cv2.cvtColor(self.processed_image,
                                             cv2.COLOR_GRAY2BGR)
     
