@@ -8,7 +8,7 @@ User should create virtual environment using `venv` and requirements from `requi
 ## Execution
  Program should be executed on console as described below:
 ```
-python image_url option [parameters]
+python image_downloader.py image_url option [parameters]
 ```
 where:
 * `image_url` - string based url for picture 
