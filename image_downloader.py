@@ -1,7 +1,5 @@
 import argparse
-import requests
 from image_utils.image_processor import Image_Processor
-import numpy as np
 
 ap = argparse.ArgumentParser(description='Download picture from url and process it.')
 
@@ -62,5 +60,6 @@ for argument in vars(args):
             
         elif argument == 'cut':
             image_processor.cut(value)
-    
+
+# wait for user input inside this method
 image_processor.show_images()

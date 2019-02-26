@@ -28,10 +28,8 @@ class Image_Processor:
         # defy some flipping and transposing functions
         def h_flip(image):
             return cv2.flip(image, 1)
-        
         def v_flip(image):
             return cv2.flip(image, 0)
-        
         def transpose(image):
             return cv2.transpose(image)
         
@@ -44,13 +42,13 @@ class Image_Processor:
             
         elif rotation == 270:
             self.processed_image = v_flip(transpose(self.original_image))
-            
+        
+        # raise exception if user specify different rotation
         else:
             raise ValueError('invalid rotation for image: ', rotation)
     
-    # execute binary threshold. Save image 
+    # execute binary threshold
     def binary_threshold(self, threshold):
-        print(threshold)
         if not 0 <= threshold <= 255:
             raise ValueError('binary threshold not in range [0, 255]')
         
@@ -62,6 +60,7 @@ class Image_Processor:
     
     # cut image into region specified by pixels
     def cut(self, pixels):
+        # check if there is correct amount of values specified by user
         try:
             x_start, y_start, x_end, y_end = pixels
         except TypeError:
@@ -75,7 +74,6 @@ class Image_Processor:
                not 0 <= y_start < y_end <= height:
                 raise ValueError('invalid parameters of cut x: {} y:{} to x: {}, y: {}\
                 for image size width: {}, height: {}'.format(*pixels, width, height))
-            print(pixels)
             self.processed_image = self.original_image[y_start : y_end, 
                                                        x_start : x_end]
     
@@ -83,11 +81,11 @@ class Image_Processor:
     def reverse_colors(self):
         self.processed_image = cv2.bitwise_not(self.original_image)
     
-    
     # private method for creating file names from current time and suffix
     def _create_file_name(self, suffix):
         ext = '.png'
         name = time.strftime('%Y-%m-%d_%H-%M-%S', time.localtime()) + suffix + ext
+        
         return name
     
     # private method to add black boarders on top and below an image
@@ -99,9 +97,11 @@ class Image_Processor:
         return cv2.copyMakeBorder(image, int(border), int(border + 0.6), 
                                       0, 0, cv2.BORDER_CONSTANT, 0)
     
+    
     # private method to create image to display for user. Either original, or
     # original with processed side-by-side
     def _create_output_image(self):
+        
         # show both images side-by-side if there is processed image
         if self.processed_image is not None:
             # calculate border size based on differences between heights
@@ -122,19 +122,21 @@ class Image_Processor:
             # concatenate pictures side-by-side
             out_image = np.concatenate((new_original, new_processed), axis=1)
             title = 'Image comparison'
-            
+        
+        # output original image, if there was no processing
         else:
-            out = self.original_image
+            out_image = self.original_image
             title = 'Original image'
             
         return [title, out_image]
     
     
-    # display images and wait for user input for 100 seconds
+    # display images and wait for user input
     def show_images(self):
         
         # create and display image
-        cv2.imshow(*self._create_output_image())
+        title, image = self._create_output_image()
+        cv2.imshow(title, image)
         
         # save pictures as user specify, quit after pressing 'q'
         while True:
@@ -151,7 +153,7 @@ class Image_Processor:
             
             # user pressed 'b' and there is a processed image
             elif key_pressed == ord('b') and self.processed_image is not None:
-                cv2.imwrite(self._create_file_name('_b'), out)
+                cv2.imwrite(self._create_file_name('_b'), image)
                 
             # user pressed 'q'
             elif key_pressed == ord('q'):
@@ -159,16 +161,16 @@ class Image_Processor:
         
         cv2.destroyAllWindows()
         
-        
+    # save original image
     def save_original(self):
         file_name = self._create_file_name('_o')
         cv2.imwrite(file_name, self.original_image)
+        # return filename for testing
         return file_name
     
-    
+    # save processed image
     def save_processed(self):
         file_name = self._create_file_name('_p')
         cv2.imwrite(file_name, self.processed_image)
+        # return filename for testing
         return file_name
-    
-                  
