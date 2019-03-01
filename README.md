@@ -17,27 +17,27 @@ where:
 ### Postprocessing options
 * `-g` change color image into grayscale
 ```
-python 'http://<path_to_pic>.png' -g
+python http://<path_to_pic>.png -g
 ```
 * `-b THRESHOLD` execute binary threshold where `THRESHOLD` is integer parameter value 0 - 255
 ```
-python 'http://<path_to_pic>.png' -b 100
+python http://<path_to_pic>.png -b 100
 ```
 * `-rc` reverse colors
 ```
-python 'http://<path_to_pic>.png' -rc
+python http://<path_to_pic>.png -rc
 ```
 * `-r ANGLE` rotate picture clockwise by angle where `ANGLE` is parameter from [90, 180, 270]
 ```
-python 'http://<path_to_pic>.png' -r 180
+python http://<path_to_pic>.png -r 180
 ```
 * `-c PIXELS` cut image specifyed by `PIXELS` as 4 coordinates: x_start y_start x_end y_end **with no comma** (coordinates x_start: 0 and y_start: 0 being top left of the picture)
 ```
-python 'http://<path_to_pic>.png' -c 10 20 250 400
+python http://<path_to_pic>.png -c 10 20 250 400
 ```
 * no option will just display original picture
 ```
-python 'http://<path_to_pic>.png'
+python http://<path_to_pic>.png
 ```
 	
 ## Output
