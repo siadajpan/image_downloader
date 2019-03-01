@@ -123,10 +123,10 @@ class ImageProcessor:
         title, image = self._create_output_image()
         cv2.imshow(title, image)
 
-        # save pictures as user specify, quit after pressing 'q'
-        while True:
+        # save pictures as user specify, quit after pressing 'q', or closing window with 'x'
+        while cv2.getWindowProperty(title, 0) >= 0:
             # wait for key press
-            key_pressed = cv2.waitKey(0)
+            key_pressed = cv2.waitKey(1000)
 
             # user pressed 'o'
             if key_pressed == ord('o'):
@@ -143,6 +143,9 @@ class ImageProcessor:
             # user pressed 'q'
             elif key_pressed == ord('q'):
                 break
+
+            else:
+                pass
 
         cv2.destroyAllWindows()
 
